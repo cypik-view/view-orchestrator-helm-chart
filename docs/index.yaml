@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  view-orchestrator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-02-11T16:27:49.135483136+05:30"
+    description: A Helm chart for Kubernetes
+    digest: fd0ab597273e084c1c8945a93f80977e8d14729a22e8f9a1553a5456e622ce85
+    name: view-orchestrator
+    type: application
+    urls:
+    - https://github.com/cypik-view/view-orchestrator-helm-chart.git/charts/view-orchestrator-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-02-11T16:27:49.13467217+05:30"

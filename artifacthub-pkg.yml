@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Package
+metadata:
+  name: view-orchestrator-helm-chart
+  version: 0.1.0
+  description: A Helm chart for deploying view-orchestrator on Kubernetes.
+  keywords:
+    - view-orchestrator
+    - helm
+  maintainers:
+    - name: Sohan
+      email: sohanyadavdevops@gmail.com
+  sources:
+    - name: GitHub
+      url: https://github.com/cypik-view/view-orchestrator-helm-chart
+  home: https://github.com/cypik-view/view-orchestrator-helm-chart
