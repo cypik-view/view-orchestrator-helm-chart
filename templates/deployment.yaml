@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-orchestrator
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-orchestrator
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-orchestrator
+    spec:
+      containers:
+          - name: orchestrator
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            env:
+              {{- range $key, $value := .Values.env }}
+              - name: {{ $key }}
+                value: "{{ $value }}"
+              {{- end }}
+            volumeMounts:
+              - name: config-volume
+                mountPath: /app/config
+                subPath: view.json
+              - name: shared-storage
+                mountPath: /app/assets
+                subPath: assets
+              - name: shared-storage
+                mountPath: /app/logs
+                subPath: logs
+              - name: shared-storage
+                mountPath: /app/dataflowlogs
+                subPath: dataflowlogs
+              - name: shared-storage
+                mountPath: /app/dataflowmaps
+                subPath: dataflowmaps
+              - name: shared-storage
+                mountPath: /app/packages
+                subPath: packages
+#              - name: shared-storage
+#                mountPath: /app/Steps
+#                subPath: Steps
+              - name: shared-storage
+                mountPath: /app/ingest
+                subPath: ingest
+              - name: shared-storage
+                mountPath: /app/webhookreq
+                subPath: webhookreq
+              - name: shared-storage
+                mountPath: /app/webhookresp
+                subPath: webhookresp
+              - name: shared-storage
+                mountPath: /app/controllog
+                subPath: controllog
+              - name: shared-storage
+                mountPath: /app/controlapi
+                subPath: controlapi
+              - name: shared-storage
+                mountPath: /app/controltoken
+                subPath: controltoken
+            ports:
+              - containerPort: 8501
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Release.Name }}-config
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-shared-pvc

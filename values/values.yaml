@@ -1,0 +1,41 @@
+replicaCount: 1  # Default replica count
+
+image:
+  repository: viewio/view-orchestrator
+  tag: v1.1.0
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8501
+  type: ClusterIP
+
+env:
+  VIEW_ACCOUNT_GUID: "1164b9f2-f988-4975-b1a6-e2c9f79bd228"
+  VIEW_DATABASE_TYPE: "Mysql"
+  VIEW_DATABASE_HOST: "mysql"
+  VIEW_DATABASE_PORT: 3306
+  VIEW_DATABASE_NAME: "view"
+  VIEW_DATABASE_USER: "root"
+  VIEW_DATABASE_PASS: "password"
+  VIEW_CONSOLE_LOGGING: 1
+  VIEW_CONTROL_HOSTNAME: "control.view.io"
+  VIEW_CONTROL_PORT: 8403
+  VIEW_CONTROL_SSL: "true"
+  VIEW_CONTROL_SWVERSION: "v1.0.0"
+  TERM: "xterm-256color"
+
+persistence:
+  enabled: true
+  storageClass: "standard"
+  accessModes:
+    - ReadWriteMany
+  size: 5Gi
+
+
+dependencies:
+  mysql:
+    name: mysql
+    enabled: true
+  rabbitmq:
+    name: rabbitmq
+    enabled: true
