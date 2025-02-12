@@ -7,6 +7,6 @@ spec:
     app: {{ .Release.Name }}-orchestrator
   ports:
       - protocol: TCP
-        port: 8501
-        targetPort: 8501
+        port: {{ .Values.service.port }}
+        targetPort: {{ .Values.service.port }}
   type: {{ .Values.service.type }}
