@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-orchestrator
+  name: {{ .Chart.Name }}-orchestrator
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-orchestrator
+      app: {{ .Chart.Name }}-orchestrator
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-orchestrator
+        app: {{ .Chart.Name }}-orchestrator
     spec:
       containers:
         - name: {{ .Values.container.name }}
@@ -28,14 +28,14 @@ spec:
             {{- range .Values.volumeMounts.shared }}
             - name: {{ .name }}
               mountPath: {{ .mountPath }}
-              subPath: {{ .subPath }}
+             # subPath: {{ .subPath }}
             {{- end }}
           ports:
             - containerPort: {{ .Values.container.port }}
       volumes:
         - name: config-volume
           configMap:
-            name: {{ .Release.Name }}-config
+            name: {{ .Chart.Name }}-config
         - name: shared-storage
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-shared-pvc
+            claimName: {{ .Chart.Name }}-shared-pvc

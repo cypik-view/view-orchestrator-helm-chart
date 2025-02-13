@@ -10,7 +10,7 @@ service:
   type: "ClusterIP"
 
 env:
-  VIEW_ACCOUNT_GUID: "1164b9f2-f988-4975-b1a6-e2c9f79bd228"
+  VIEW_ACCOUNT_GUID: "cc47139e-fc27-4af2-9bfe-3551c0bda88d"
   VIEW_DATABASE_TYPE: "Mysql"
   VIEW_DATABASE_HOST: "mysql"
   VIEW_DATABASE_PORT: 3306
